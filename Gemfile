@@ -13,6 +13,9 @@ group :development, :test do
  gem 'sqlite3'
 end
 
+# from rails tutorial ch 5 pg 204
+gem 'bootstrap-sass', '3.4.1'
+
 group :production do
   gem 'pg'
 end

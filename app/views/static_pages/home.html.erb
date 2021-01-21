@@ -1,5 +1,12 @@
 <%# provide(:title, "Home") %>
+<div class="center jumbotron">
+    <h1>Welcome to StaticPages#home!</h1>
+    <h2>Some RoR tutorial madness!<h2>
+    <%= link_to "Sign up now!", '#', class: "btn btn-lg btn-primary" %>
+</div>
 
-    <h1>StaticPages#home</h1>
-    <p>Find me in app/views/static_pages/home.html.erb</p>
+    <%= link_to image_tag("rails.png", alt: "Rails logo"), 'http://rubyonrails.org/' %>
+    <!--<%= link_to image_tag("kitten.jpg", alt: "Kitten") %>
+    this does work - "Anything in the public folder is accessible at the root path (/)"
+    <img src="/images/kitten_public.jpg" alt="kitten"/>-->
 
