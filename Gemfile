@@ -19,6 +19,8 @@ gem 'bootstrap-sass', '3.4.1'
 group :production do
   gem 'pg'
 end
+
+gem 'bcrypt', '3.1.16'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
