@@ -1,6 +1,6 @@
 class StaticPagesController < ApplicationController
   def home
-     flash[:wtf] = 'WTF ' * 10
+    # flash[:wtf] = 'WTF ' * 10
     # flash[:success] = "HIHIHHI"
   end
 

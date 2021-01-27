@@ -7,3 +7,11 @@
 #two:
 #  name: MyString
 #  email: MyString
+
+# apparently make extra sure indents are spaces not tabs
+# retreive it in test like: @user = users(:michael)
+# users refers to the this fixture filename
+michael:
+  name: Michael Example
+  email: michael@example.com
+  password_digest: <%= User.digest('password') %>

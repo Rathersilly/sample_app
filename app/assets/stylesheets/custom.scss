@@ -68,6 +68,15 @@ p {
     text-decoration: none;
 }
 
+.navbar-nav {
+    flex-direction: row;
+    float: right;
+}
+
+.navbar-fixed-top {
+    max-height: 50px;
+}
+
 /* footer */
 
 footer {

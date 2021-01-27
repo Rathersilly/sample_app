@@ -35,6 +35,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     #assert_select 'div.alert-success'
     #assert !flash[:success].nil?
     assert flash[:success]
+    assert is_logged_in?
   end
 
   
