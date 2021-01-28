@@ -5,13 +5,17 @@ class SessionsController < ApplicationController
   def create
       #get params
       #create session based on them
-      user = User.find_by(email: params[:session][:email].downcase)
-      if user && user.authenticate(params[:session][:password])
+      @user = User.find_by(email: params[:session][:email].downcase)
+      if @user && @user.authenticate(params[:session][:password])
         #log the user in and redirect to the user's show page
-        log_in user
-        redirect_to user
+        log_in @user
+        # remember user
+        params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
+        redirect_to @user
       else
         #create error message
+        # flash lasts for one request. render isn't a request, so
+        # flash.now is what we use instead
         flash.now[:danger] = "Invalid email/password combination' # Not quite right!"
         render 'new'  
       end
@@ -19,7 +23,7 @@ class SessionsController < ApplicationController
 
   def destroy
     #log_out is in sessions_helper.rb b/c it might be needed elsewhere?
-    log_out
+    log_out if logged_in?
     redirect_to root_url
   end
 
