@@ -19,7 +19,9 @@ gem 'bootstrap-sass', '3.4.1'
 group :production do
   gem 'pg'
 end
-
+gem 'will_paginate',           '3.3.0'
+gem 'bootstrap-will_paginate', '1.0.0'
+gem 'faker', '2.15.1'
 gem 'bcrypt', '3.1.16'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
