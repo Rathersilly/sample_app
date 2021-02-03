@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :users
+  resources :account_activations, only: [:edit]
 
   #get 'users/new'
   # see Rails Tutorial 5.3.2 to see how root_path etc are formed

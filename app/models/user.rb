@@ -1,6 +1,7 @@
 class User < ApplicationRecord
-  attr_accessor :remember_token
+  attr_accessor :remember_token, :activation_token
 
+  before_create :create_activation_digest
   before_save { self.email.downcase!}  
   # also { self.email = email.downcase}   
   # which is same as before_save { self.email = self.email.downcase}
@@ -34,15 +35,25 @@ class User < ApplicationRecord
   end
 
   # Returns true if the given token matches the digest.
-  def authenticated?(remember_token)
-    return false if remember_digest.nil? # RT p432
+  def authenticated?(attribute, token)
+    # see RT 11.3 - send method
+    digest = send("#{attribute}_digest")
+    return false if digest.nil? # RT p432
     # see RT pg 420 blaze it for info.
     # also remember_token is not the same as @remember_token
-    BCrypt::Password.new(remember_digest).is_password?(remember_token)
+    BCrypt::Password.new(digest).is_password?(token)
   end
 
   # Forgets a user
   def forget
     update_attribute(:remember_digest, nil)
   end
+
+  private
+    # Creates and assigns the activation token and digest.
+    def create_activation_digest
+      self.activation_token = User.new_token
+      self.activation_digest = User.digest(activation_token)
+    end
+
 end
