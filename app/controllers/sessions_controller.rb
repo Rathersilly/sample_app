@@ -1,4 +1,7 @@
 class SessionsController < ApplicationController
+  # curl -XPOST -v -H 'Content-Type: application/json' -H 'Accept:application/json' http://localhost:3000/login -d '{"session": { "email": "asdf@example.com", "password": "asdfasdf" } } ' -c cookie.txt
+  # this line will let you log in from curl:
+  # skip_before_action :verify_authenticity_token
   def new
   end
 
