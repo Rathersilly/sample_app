@@ -77,6 +77,10 @@ class User < ApplicationRecord
     reset_sent_at < 2.hours.ago
   end
 
+  def feed
+    Micropost.where("User_id = ?", id)
+  end
+
 
   private
     # Creates and assigns the activation token and digest.
