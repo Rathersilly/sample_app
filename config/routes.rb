@@ -2,9 +2,17 @@ Rails.application.routes.draw do
   #get 'password_resets/new'
   #get 'password_resets/edit'
   resources :users
-  resources :account_activations, only: [:edit]
-  resources :password_resets, only: [:new, :create, :edit, :update]
-  resources :microposts, only: [:create, :destroy]
+  resources :account_activations,   only: [:edit]
+  resources :password_resets,       only: [:new, :create, :edit, :update]
+  resources :microposts,            only: [:create, :destroy]
+  resources :relationships,         only: [:create, :destroy]
+
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
+
 
   #get 'users/new'
   # see Rails Tutorial 5.3.2 to see how root_path etc are formed
