@@ -86,7 +86,19 @@ class User < ApplicationRecord
   end
 
   def feed
-    Micropost.where("User_id = ?", id)
+    # following_ids is a shortcut added by rails
+    # Micropost.where("user_id IN (?) OR user_id = ?", following_ids, id)
+    # Same as
+    # Micropost.where("user_id IN (?) OR user_id = ?", following.map(&:id), id)
+    # in RT 14.3.2, it has following.map(&:id).join(', '), but that
+    # seems not to be necessary
+
+    # The final form moves the array from ruby to sql - way more scalable
+    following_ids = "SELECT followed_id FROM relationships
+                     WHERE follower_id = :user_id"
+    Micropost.where("user_id IN (#{following_ids}) OR user_id = :user_id",
+                    following_ids: following_ids, user_id: id)
+
   end
 
   def follow(other_user)
